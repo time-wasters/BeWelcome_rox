@@ -14,8 +14,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	ln -sf "$PHP_INI_RECOMMENDED" "$PHP_INI_DIR/php.ini"
 
 	mkdir -p var/cache var/log data/user/avatars data/gallery/member upload/images
-	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var build data upload
-	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var build data upload
+	#setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var build data upload
+	#setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var build data upload
 
 	if [ "$APP_ENV" != 'prod' ] && [ -f /certs/localCA.crt ]; then
 		ln -sf /certs/localCA.crt /usr/local/share/ca-certificates/localCA.crt
@@ -37,8 +37,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 			mkdir -p config/jwt
 			echo "$jwt_passphrase" | openssl genpkey -out config/jwt/private.pem -pass stdin -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096
 			echo "$jwt_passphrase" | openssl pkey -in config/jwt/private.pem -passin stdin -out config/jwt/public.pem -pubout
-			setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
-			setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+			#setfacl -R -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
+			#setfacl -dR -m u:www-data:rX -m u:"$(whoami)":rwX config/jwt
 		fi
 	fi
 
