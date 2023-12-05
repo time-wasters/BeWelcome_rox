@@ -7,6 +7,12 @@ services:
         published: 8080
         protocol: tcp
 
+  db:
+    ports:
+      - target: 3306
+        published: 6033
+        protocol: tcp
+
   mailer:
     ports:
       - target: 80
